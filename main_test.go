@@ -135,19 +135,19 @@ func TestTimeHandler_CreateReturns201(t *testing.T) {
 func TestFlakyTiming(t *testing.T) {
 	start := time.Now()
 	// Simulate work that sometimes takes too long
-	time.Sleep(time.Duration(rand.Intn(50)) * time.Millisecond)
+	time.Sleep(time.Duration(rand.Intn(60)) * time.Millisecond)
 	elapsed := time.Since(start)
 
-	if elapsed > 30*time.Millisecond {
-		t.Errorf("too slow: %v (threshold 30ms)", elapsed)
+	if elapsed > 50*time.Millisecond {
+		t.Errorf("too slow: %v (threshold 50ms)", elapsed)
 	}
 }
 
 // --- Flaky test: random failure ---
 
 func TestFlakyRandom(t *testing.T) {
-	// Fails ~20% of the time
-	if rand.Intn(5) == 0 {
+	// Fails ~10% of the time
+	if rand.Intn(10) == 0 {
 		t.Error("random failure — this test is flaky")
 	}
 }
