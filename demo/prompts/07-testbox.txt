@@ -1,0 +1,3 @@
+I want to test my code in the real CI environment before pushing.
+Use sem-agent testbox to warm up a machine for bug-playground,
+sync the local code, and run the tests. Show me the results.

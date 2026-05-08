@@ -1,0 +1,16 @@
+version: v1.0
+name: Deploy to Staging
+agent:
+  machine:
+    type: f1-standard-2
+    os_image: ubuntu2204
+
+blocks:
+  - name: Deploy
+    task:
+      jobs:
+        - name: deploy staging
+          commands:
+            - echo "Deploying to staging..."
+            - sleep 2
+            - echo "Staging deploy complete"

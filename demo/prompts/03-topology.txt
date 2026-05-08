@@ -1,0 +1,3 @@
+Analyze the pipeline topology for the latest workflow on bug-playground main branch.
+Show me the critical path, and if there are failures, show the blast radius —
+which blocks failed because of upstream failures vs which are root causes.

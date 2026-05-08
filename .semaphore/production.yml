@@ -1,0 +1,16 @@
+version: v1.0
+name: Deploy to Production
+agent:
+  machine:
+    type: f1-standard-2
+    os_image: ubuntu2204
+
+blocks:
+  - name: Deploy
+    task:
+      jobs:
+        - name: deploy production
+          commands:
+            - echo "Deploying to production..."
+            - sleep 2
+            - echo "Production deploy complete"

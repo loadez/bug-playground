@@ -1,0 +1,3 @@
+I have a CLI tool called sem-agent installed. I don't know what it does.
+Explore its capabilities and tell me what I can do with it for CI/CD management.
+Then check the status of a project called bug-playground.

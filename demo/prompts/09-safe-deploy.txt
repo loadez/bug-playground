@@ -1,0 +1,3 @@
+The fix/discount-and-status branch is green on bug-playground.
+First do a dry-run of promoting to "Deploy to Staging" (no --confirm).
+Show me what would happen. Then if it looks good, actually promote and wait for it to complete.

@@ -1,0 +1,2 @@
+Compare CI status between main and fix/discount-and-status branches on bug-playground.
+Which branch is passing? What's different between them?

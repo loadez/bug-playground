@@ -1,0 +1,2 @@
+Generate a health report for the bug-playground project.
+Include pass rates, recent failures, deployment target status, and an overall verdict.

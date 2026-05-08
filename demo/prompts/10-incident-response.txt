@@ -1,0 +1,8 @@
+Production alert: bug-playground CI is red on main. I need you to:
+1. Diagnose what's wrong
+2. Check if any failures are flaky (not real bugs)
+3. For real bugs, fix the code
+4. Push to a fix branch
+5. Wait for CI to pass
+6. Promote to staging
+7. Give me a summary of everything you did
