@@ -67,7 +67,6 @@ func itemHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(item)
 }
 
-// BUG: discount uses integer division, truncating results
 func discountHandler(w http.ResponseWriter, r *http.Request) {
 	priceStr := r.URL.Query().Get("price")
 	pctStr := r.URL.Query().Get("percent")
@@ -75,14 +74,12 @@ func discountHandler(w http.ResponseWriter, r *http.Request) {
 	price, _ := strconv.ParseFloat(priceStr, 64)
 	pct, _ := strconv.Atoi(pctStr)
 
-	// Bug: integer division truncates
-	discounted := price - price*float64(pct/100)
+	discounted := price - price*float64(pct)/100
 
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(map[string]float64{"original": price, "discounted": discounted})
 }
 
-// BUG: returns wrong status code (200 instead of 201) for POST-like time creation
 func timeHandler(w http.ResponseWriter, r *http.Request) {
 	now := time.Now()
 	resp := map[string]interface{}{
@@ -93,7 +90,7 @@ func timeHandler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Query().Get("create") == "true" {
 		// Should return 201 Created, but returns 200
 		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusOK) // BUG: should be StatusCreated
+		w.WriteHeader(http.StatusCreated)
 		json.NewEncoder(w).Encode(resp)
 		return
 	}
@@ -104,7 +101,7 @@ func timeHandler(w http.ResponseWriter, r *http.Request) {
 
 // ApplyDiscount is the buggy function exposed for testing
 func ApplyDiscount(price float64, percent int) float64 {
-	return price - price*float64(percent/100)
+	return price - price*float64(percent)/100
 }
 
 // FormatPrice formats price to 2 decimal string
