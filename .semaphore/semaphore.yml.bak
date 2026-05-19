@@ -1,0 +1,71 @@
+version: v1.0
+name: Bug Playground
+agent:
+  machine:
+    type: f1-standard-2
+    os_image: ubuntu2204
+
+blocks:
+  - name: Lint
+    dependencies: []
+    task:
+      jobs:
+        - name: vet
+          commands:
+            - checkout
+            - sem-version go 1.22
+            - go vet ./...
+
+  - name: Unit Tests
+    dependencies:
+      - Lint
+    task:
+      jobs:
+        - name: go test
+          commands:
+            - checkout
+            - sem-version go 1.22
+            - go install gotest.tools/gotestsum@latest
+            - gotestsum --junitfile results.xml -- -v -count=1 ./...
+            - test-results publish results.xml
+
+  - name: Build
+    dependencies:
+      - Lint
+    task:
+      jobs:
+        - name: build binary
+          commands:
+            - checkout
+            - sem-version go 1.22
+            - go build -o bug-playground .
+            - ./bug-playground &
+            - sleep 1
+            - "curl -s http://localhost:8080/health | grep ok"
+
+  - name: Integration
+    dependencies:
+      - Unit Tests
+      - Build
+    task:
+      jobs:
+        - name: discount endpoint
+          commands:
+            - checkout
+            - sem-version go 1.22
+            - go build -o bug-playground .
+            - ./bug-playground &
+            - sleep 1
+            - |
+              RESULT=$(curl -s "http://localhost:8080/discount?price=100&percent=20")
+              echo "$RESULT"
+              echo "$RESULT" | grep '"discounted":80'
+
+promotions:
+  - name: Deploy to Staging
+    pipeline_file: staging.yml
+    auto_promote:
+      when: result = 'passed' AND branch = 'main'
+
+  - name: Deploy to Production
+    pipeline_file: production.yml

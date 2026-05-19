@@ -1,47 +1,50 @@
 version: v1.0
-name: SSH Clone Repro
+name: SSH Clone Repro - Retry + Timeout
 agent:
   machine:
     type: f1-standard-2
     os_image: ubuntu2204
 
 blocks:
-  - name: SSH Clone Stress
+  - name: SSH Clone With Retry
     dependencies: []
     task:
+      env_vars:
+        - name: GIT_SSH_COMMAND
+          value: "ssh -o ConnectTimeout=30 -o ServerAliveInterval=10 -o ServerAliveCountMax=3"
       jobs:
-        - name: ssh clone 1
+        - name: ssh retry clone 1
           commands:
             - echo "Start $(date -u)"
-            - GIT_SSH_COMMAND="ssh -o ConnectTimeout=60 -v" git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || echo "SSH CLONE FAILED exit=$?"
+            - git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || echo "ALL 3 ATTEMPTS FAILED"
             - echo "End $(date -u)"
 
-        - name: ssh clone 2
+        - name: ssh retry clone 2
           commands:
             - echo "Start $(date -u)"
-            - GIT_SSH_COMMAND="ssh -o ConnectTimeout=60 -v" git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || echo "SSH CLONE FAILED exit=$?"
+            - git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || echo "ALL 3 ATTEMPTS FAILED"
             - echo "End $(date -u)"
 
-        - name: ssh clone 3
+        - name: ssh retry clone 3
           commands:
             - echo "Start $(date -u)"
-            - GIT_SSH_COMMAND="ssh -o ConnectTimeout=60 -v" git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || echo "SSH CLONE FAILED exit=$?"
+            - git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || echo "ALL 3 ATTEMPTS FAILED"
             - echo "End $(date -u)"
 
-        - name: ssh clone 4
+        - name: ssh retry clone 4
           commands:
             - echo "Start $(date -u)"
-            - GIT_SSH_COMMAND="ssh -o ConnectTimeout=60 -v" git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || echo "SSH CLONE FAILED exit=$?"
+            - git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || echo "ALL 3 ATTEMPTS FAILED"
             - echo "End $(date -u)"
 
-        - name: ssh clone 5
+        - name: ssh retry clone 5
           commands:
             - echo "Start $(date -u)"
-            - GIT_SSH_COMMAND="ssh -o ConnectTimeout=60 -v" git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || echo "SSH CLONE FAILED exit=$?"
+            - git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || echo "ALL 3 ATTEMPTS FAILED"
             - echo "End $(date -u)"
 
-        - name: ssh clone 6
+        - name: ssh retry clone 6
           commands:
             - echo "Start $(date -u)"
-            - GIT_SSH_COMMAND="ssh -o ConnectTimeout=60 -v" git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || echo "SSH CLONE FAILED exit=$?"
+            - git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || echo "ALL 3 ATTEMPTS FAILED"
             - echo "End $(date -u)"
