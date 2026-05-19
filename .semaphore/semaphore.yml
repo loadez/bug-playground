@@ -16,35 +16,35 @@ blocks:
         - name: ssh retry clone 1
           commands:
             - echo "Start $(date -u)"
-            - retry --times 5 "timeout 120 git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh"
+            - retry --times 5 "timeout 600 git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh"
             - echo "End $(date -u)"
 
         - name: ssh retry clone 2
           commands:
             - echo "Start $(date -u)"
-            - retry --times 5 "timeout 120 git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh"
+            - retry --times 5 "timeout 600 git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh"
             - echo "End $(date -u)"
 
         - name: ssh retry clone 3
           commands:
             - echo "Start $(date -u)"
-            - retry --times 5 "timeout 120 git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh"
+            - retry --times 5 "timeout 600 git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh"
             - echo "End $(date -u)"
 
         - name: ssh retry clone 4
           commands:
             - echo "Start $(date -u)"
-            - retry --times 5 "timeout 120 git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh"
+            - retry --times 5 "timeout 600 git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh"
             - echo "End $(date -u)"
 
         - name: ssh retry clone 5
           commands:
             - echo "Start $(date -u)"
-            - retry --times 5 "timeout 120 git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh"
+            - retry --times 5 "timeout 600 git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh"
             - echo "End $(date -u)"
 
         - name: ssh retry clone 6
           commands:
             - echo "Start $(date -u)"
-            - retry --times 5 "timeout 120 git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh"
+            - retry --times 5 "timeout 600 git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh"
             - echo "End $(date -u)"
