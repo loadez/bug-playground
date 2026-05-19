@@ -1,0 +1,25 @@
+version: v1.0
+name: SSH Clone Repro
+agent:
+  machine:
+    type: f1-standard-2
+    os_image: ubuntu2204
+
+blocks:
+  - name: SSH Clone Large Repo
+    dependencies: []
+    task:
+      jobs:
+        - name: ssh clone chromium
+          commands:
+            - echo "Testing SSH git clone of large repo (chromium)"
+            - echo "Start time $(date -u)"
+            - GIT_SSH_COMMAND="ssh -o ConnectTimeout=60 -v" git clone --depth 1 git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || echo "SSH CLONE FAILED with exit code $?"
+            - echo "End time $(date -u)"
+
+        - name: https clone chromium
+          commands:
+            - echo "Testing HTTPS git clone of large repo (chromium)"
+            - echo "Start time $(date -u)"
+            - git clone --depth 1 https://github.com/chromium/chromium.git /tmp/chromium-https 2>&1 || echo "HTTPS CLONE FAILED with exit code $?"
+            - echo "End time $(date -u)"
