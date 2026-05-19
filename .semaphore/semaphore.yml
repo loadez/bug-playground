@@ -16,35 +16,35 @@ blocks:
         - name: ssh retry clone 1
           commands:
             - echo "Start $(date -u)"
-            - git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || echo "ALL 3 ATTEMPTS FAILED"
+            - retry --times 5 "timeout 120 git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh"
             - echo "End $(date -u)"
 
         - name: ssh retry clone 2
           commands:
             - echo "Start $(date -u)"
-            - git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || echo "ALL 3 ATTEMPTS FAILED"
+            - retry --times 5 "timeout 120 git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh"
             - echo "End $(date -u)"
 
         - name: ssh retry clone 3
           commands:
             - echo "Start $(date -u)"
-            - git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || echo "ALL 3 ATTEMPTS FAILED"
+            - retry --times 5 "timeout 120 git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh"
             - echo "End $(date -u)"
 
         - name: ssh retry clone 4
           commands:
             - echo "Start $(date -u)"
-            - git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || echo "ALL 3 ATTEMPTS FAILED"
+            - retry --times 5 "timeout 120 git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh"
             - echo "End $(date -u)"
 
         - name: ssh retry clone 5
           commands:
             - echo "Start $(date -u)"
-            - git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || echo "ALL 3 ATTEMPTS FAILED"
+            - retry --times 5 "timeout 120 git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh"
             - echo "End $(date -u)"
 
         - name: ssh retry clone 6
           commands:
             - echo "Start $(date -u)"
-            - git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh 2>&1 || echo "ALL 3 ATTEMPTS FAILED"
+            - retry --times 5 "timeout 120 git clone git@github.com:chromium/chromium.git /tmp/chromium-ssh"
             - echo "End $(date -u)"
