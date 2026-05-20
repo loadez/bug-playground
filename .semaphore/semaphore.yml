@@ -1,12 +1,12 @@
 version: v1.0
-name: Clone Speed Test (50 parallel)
+name: Clone Speed Test (SSH + HTTPS x50)
 agent:
   machine:
     type: f1-standard-2
     os_image: ubuntu2204
 
 blocks:
-  - name: SSH Clone Test
+  - name: Clone Test
     dependencies: []
     execution_time_limit:
       minutes: 40
@@ -19,7 +19,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-1 2>&1 && END=$(date +%s) && echo "clone-1: $((END - START))s" && du -sh repo-1 && rm -rf repo-1' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-1: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-1: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-2
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -27,7 +29,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-2 2>&1 && END=$(date +%s) && echo "clone-2: $((END - START))s" && du -sh repo-2 && rm -rf repo-2' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-2: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-2: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-3
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -35,7 +39,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-3 2>&1 && END=$(date +%s) && echo "clone-3: $((END - START))s" && du -sh repo-3 && rm -rf repo-3' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-3: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-3: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-4
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -43,7 +49,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-4 2>&1 && END=$(date +%s) && echo "clone-4: $((END - START))s" && du -sh repo-4 && rm -rf repo-4' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-4: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-4: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-5
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -51,7 +59,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-5 2>&1 && END=$(date +%s) && echo "clone-5: $((END - START))s" && du -sh repo-5 && rm -rf repo-5' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-5: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-5: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-6
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -59,7 +69,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-6 2>&1 && END=$(date +%s) && echo "clone-6: $((END - START))s" && du -sh repo-6 && rm -rf repo-6' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-6: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-6: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-7
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -67,7 +79,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-7 2>&1 && END=$(date +%s) && echo "clone-7: $((END - START))s" && du -sh repo-7 && rm -rf repo-7' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-7: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-7: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-8
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -75,7 +89,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-8 2>&1 && END=$(date +%s) && echo "clone-8: $((END - START))s" && du -sh repo-8 && rm -rf repo-8' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-8: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-8: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-9
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -83,7 +99,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-9 2>&1 && END=$(date +%s) && echo "clone-9: $((END - START))s" && du -sh repo-9 && rm -rf repo-9' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-9: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-9: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-10
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -91,7 +109,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-10 2>&1 && END=$(date +%s) && echo "clone-10: $((END - START))s" && du -sh repo-10 && rm -rf repo-10' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-10: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-10: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-11
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -99,7 +119,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-11 2>&1 && END=$(date +%s) && echo "clone-11: $((END - START))s" && du -sh repo-11 && rm -rf repo-11' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-11: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-11: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-12
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -107,7 +129,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-12 2>&1 && END=$(date +%s) && echo "clone-12: $((END - START))s" && du -sh repo-12 && rm -rf repo-12' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-12: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-12: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-13
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -115,7 +139,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-13 2>&1 && END=$(date +%s) && echo "clone-13: $((END - START))s" && du -sh repo-13 && rm -rf repo-13' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-13: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-13: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-14
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -123,7 +149,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-14 2>&1 && END=$(date +%s) && echo "clone-14: $((END - START))s" && du -sh repo-14 && rm -rf repo-14' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-14: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-14: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-15
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -131,7 +159,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-15 2>&1 && END=$(date +%s) && echo "clone-15: $((END - START))s" && du -sh repo-15 && rm -rf repo-15' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-15: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-15: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-16
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -139,7 +169,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-16 2>&1 && END=$(date +%s) && echo "clone-16: $((END - START))s" && du -sh repo-16 && rm -rf repo-16' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-16: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-16: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-17
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -147,7 +179,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-17 2>&1 && END=$(date +%s) && echo "clone-17: $((END - START))s" && du -sh repo-17 && rm -rf repo-17' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-17: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-17: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-18
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -155,7 +189,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-18 2>&1 && END=$(date +%s) && echo "clone-18: $((END - START))s" && du -sh repo-18 && rm -rf repo-18' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-18: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-18: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-19
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -163,7 +199,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-19 2>&1 && END=$(date +%s) && echo "clone-19: $((END - START))s" && du -sh repo-19 && rm -rf repo-19' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-19: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-19: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-20
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -171,7 +209,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-20 2>&1 && END=$(date +%s) && echo "clone-20: $((END - START))s" && du -sh repo-20 && rm -rf repo-20' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-20: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-20: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-21
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -179,7 +219,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-21 2>&1 && END=$(date +%s) && echo "clone-21: $((END - START))s" && du -sh repo-21 && rm -rf repo-21' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-21: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-21: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-22
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -187,7 +229,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-22 2>&1 && END=$(date +%s) && echo "clone-22: $((END - START))s" && du -sh repo-22 && rm -rf repo-22' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-22: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-22: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-23
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -195,7 +239,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-23 2>&1 && END=$(date +%s) && echo "clone-23: $((END - START))s" && du -sh repo-23 && rm -rf repo-23' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-23: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-23: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-24
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -203,7 +249,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-24 2>&1 && END=$(date +%s) && echo "clone-24: $((END - START))s" && du -sh repo-24 && rm -rf repo-24' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-24: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-24: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-25
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -211,7 +259,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-25 2>&1 && END=$(date +%s) && echo "clone-25: $((END - START))s" && du -sh repo-25 && rm -rf repo-25' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-25: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-25: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-26
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -219,7 +269,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-26 2>&1 && END=$(date +%s) && echo "clone-26: $((END - START))s" && du -sh repo-26 && rm -rf repo-26' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-26: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-26: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-27
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -227,7 +279,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-27 2>&1 && END=$(date +%s) && echo "clone-27: $((END - START))s" && du -sh repo-27 && rm -rf repo-27' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-27: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-27: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-28
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -235,7 +289,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-28 2>&1 && END=$(date +%s) && echo "clone-28: $((END - START))s" && du -sh repo-28 && rm -rf repo-28' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-28: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-28: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-29
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -243,7 +299,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-29 2>&1 && END=$(date +%s) && echo "clone-29: $((END - START))s" && du -sh repo-29 && rm -rf repo-29' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-29: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-29: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-30
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -251,7 +309,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-30 2>&1 && END=$(date +%s) && echo "clone-30: $((END - START))s" && du -sh repo-30 && rm -rf repo-30' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-30: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-30: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-31
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -259,7 +319,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-31 2>&1 && END=$(date +%s) && echo "clone-31: $((END - START))s" && du -sh repo-31 && rm -rf repo-31' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-31: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-31: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-32
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -267,7 +329,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-32 2>&1 && END=$(date +%s) && echo "clone-32: $((END - START))s" && du -sh repo-32 && rm -rf repo-32' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-32: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-32: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-33
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -275,7 +339,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-33 2>&1 && END=$(date +%s) && echo "clone-33: $((END - START))s" && du -sh repo-33 && rm -rf repo-33' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-33: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-33: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-34
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -283,7 +349,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-34 2>&1 && END=$(date +%s) && echo "clone-34: $((END - START))s" && du -sh repo-34 && rm -rf repo-34' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-34: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-34: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-35
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -291,7 +359,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-35 2>&1 && END=$(date +%s) && echo "clone-35: $((END - START))s" && du -sh repo-35 && rm -rf repo-35' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-35: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-35: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-36
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -299,7 +369,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-36 2>&1 && END=$(date +%s) && echo "clone-36: $((END - START))s" && du -sh repo-36 && rm -rf repo-36' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-36: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-36: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-37
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -307,7 +379,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-37 2>&1 && END=$(date +%s) && echo "clone-37: $((END - START))s" && du -sh repo-37 && rm -rf repo-37' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-37: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-37: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-38
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -315,7 +389,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-38 2>&1 && END=$(date +%s) && echo "clone-38: $((END - START))s" && du -sh repo-38 && rm -rf repo-38' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-38: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-38: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-39
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -323,7 +399,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-39 2>&1 && END=$(date +%s) && echo "clone-39: $((END - START))s" && du -sh repo-39 && rm -rf repo-39' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-39: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-39: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-40
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -331,7 +409,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-40 2>&1 && END=$(date +%s) && echo "clone-40: $((END - START))s" && du -sh repo-40 && rm -rf repo-40' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-40: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-40: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-41
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -339,7 +419,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-41 2>&1 && END=$(date +%s) && echo "clone-41: $((END - START))s" && du -sh repo-41 && rm -rf repo-41' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-41: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-41: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-42
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -347,7 +429,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-42 2>&1 && END=$(date +%s) && echo "clone-42: $((END - START))s" && du -sh repo-42 && rm -rf repo-42' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-42: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-42: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-43
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -355,7 +439,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-43 2>&1 && END=$(date +%s) && echo "clone-43: $((END - START))s" && du -sh repo-43 && rm -rf repo-43' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-43: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-43: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-44
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -363,7 +449,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-44 2>&1 && END=$(date +%s) && echo "clone-44: $((END - START))s" && du -sh repo-44 && rm -rf repo-44' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-44: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-44: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-45
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -371,7 +459,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-45 2>&1 && END=$(date +%s) && echo "clone-45: $((END - START))s" && du -sh repo-45 && rm -rf repo-45' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-45: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-45: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-46
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -379,7 +469,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-46 2>&1 && END=$(date +%s) && echo "clone-46: $((END - START))s" && du -sh repo-46 && rm -rf repo-46' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-46: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-46: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-47
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -387,7 +479,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-47 2>&1 && END=$(date +%s) && echo "clone-47: $((END - START))s" && du -sh repo-47 && rm -rf repo-47' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-47: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-47: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-48
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -395,7 +489,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-48 2>&1 && END=$(date +%s) && echo "clone-48: $((END - START))s" && du -sh repo-48 && rm -rf repo-48' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-48: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-48: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-49
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -403,7 +499,9 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-49 2>&1 && END=$(date +%s) && echo "clone-49: $((END - START))s" && du -sh repo-49 && rm -rf repo-49' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-49: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-49: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
         - name: clone-50
           commands:
             - grep -v github /etc/hosts > /tmp/hosts
@@ -411,4 +509,6 @@ blocks:
             - echo "140.82.116.3 github.com" | sudo tee -a /etc/hosts
             - echo -e "Host github.com\n  HostName 140.82.116.36\n  Port 22\n  User git" >> ~/.ssh/config
             - cat ~/.ssh/config
-            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-50 2>&1 && END=$(date +%s) && echo "clone-50: $((END - START))s" && du -sh repo-50 && rm -rf repo-50' 
+            - cat /etc/hosts
+            - 'START=$(date +%s) && git clone git@github.com:semaphoreio/semaphore.git repo-ssh 2>&1 && END=$(date +%s) && echo "ssh-clone-50: $((END - START))s" && du -sh repo-ssh && rm -rf repo-ssh'
+            - 'START=$(date +%s) && git clone https://github.com/semaphoreio/semaphore.git repo-https 2>&1 && END=$(date +%s) && echo "https-clone-50: $((END - START))s" && du -sh repo-https && rm -rf repo-https'
