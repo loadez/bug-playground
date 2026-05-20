@@ -5,13 +5,11 @@ agent:
     type: f1-standard-2
     os_image: ubuntu2204
 
-global_job_config:
-  execution_time_limit:
-    minutes: 40
-
 blocks:
   - name: SSH Clone Test
     dependencies: []
+    execution_time_limit:
+      minutes: 40
     task:
       jobs:
         - name: clone-1
